@@ -1,0 +1,14 @@
+.Crud {
+    padding: 1rem;
+}
+
+.CrudTable {
+    padding: 0rem;
+    background-color: var(--dark--70);
+    border-radius: 1rem;
+}
+
+.CrudHead {
+    display: flex;
+    justify-content: end;
+}

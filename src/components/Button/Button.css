@@ -1,0 +1,23 @@
+.Button {
+    padding:0.4rem 0.7rem;
+    border-radius: 0.3rem;
+    border: none;
+    background-color: var(--dark--50);
+    color:var(--dark--0);
+    margin:0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Button:hover {
+    cursor: pointer;
+}
+
+.ButtonFloat {
+    border-radius: 99999rem;
+    padding: 0.6rem 0.7rem;
+    position: fixed;
+    bottom: 2rem ;
+    right: 2rem;
+}

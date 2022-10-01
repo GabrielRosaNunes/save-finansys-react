@@ -1,0 +1,40 @@
+.ValueCard {
+    display: flex;
+    padding: 1rem;
+    background-color: var(--dark--50);
+    border-radius: 0.6rem;
+    font-size: 1rem;
+}
+
+.ValueCard .CardIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 6rem;
+    background-color: var(--dark--75);
+    border-radius: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.CardIcon .Icon {
+   width: 1.7rem;
+}
+
+.ValueCard .CardContent {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: center;
+}
+
+.CardContent .CardContentTitle, .CardContent .CardContentValue {
+    padding: 0.5rem;
+    width: 100%;
+    text-align: right;
+}
+
+.CardContentTitle {
+    border-bottom: 1px solid var(--dark--25);
+}
+

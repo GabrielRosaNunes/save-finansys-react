@@ -1,0 +1,32 @@
+ .Content {
+    color:var(--dark--0);
+    padding:1rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Roboto;
+    font-size: 0.9rem;
+  }
+  
+
+  
+  
+  
+aside {
+    width: 15%;
+    height: 100vh;
+    transition: width 0.5s;
+  }
+  
+main {
+    flex-grow: 1;
+    height: 100vh;
+    background-color: var(--dark--75);
+  }
+  
+aside.MenuClosed {
+    width: 40px;
+  }

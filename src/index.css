@@ -1,0 +1,33 @@
+:root {
+  --dark--100:#0d1b2a;
+  --dark--75:#1b263b;
+  --dark--70:#202c44;
+  --dark--50:#415a77;
+  --dark--25:#778da9;
+  --dark--0:#e0e1dd;
+  --gray--100: #212529;
+  --gray--90: #343a40;
+  --gray--80: #495057;
+  --gray--70: #6c757d;
+  --gray--60: #adb5bd;
+  --gray--50: #ced4da;
+  --gray--40: #dee2e6;
+  --gray--30: #e9ecef;
+  --gray--20: #f8f9fa;
+  --blue--10: #a6e1fa;
+  --blue--20: #0e6ba8;
+  --blue--30: #0a2472;
+  --blue--40: #001c55;
+  --blue--50: #00072d;
+  --button--red: #e61f1c;
+  --button--blue: #3c91e6;
+  --button--green: #2d8b76;
+  --button--orange: #f87408;
+  --button--login: #155191;
+  --button--white: #e0e1dd;
+}
+
+.Icon {
+  width: 1.2rem;
+  display: flex;
+}

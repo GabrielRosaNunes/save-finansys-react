@@ -1,0 +1,23 @@
+.MenuItem {
+    padding:0.8rem;
+    border-bottom: 1px solid var(--dark--75);
+    display: flex;
+    align-items: center;
+}
+
+.MenuItem:hover {
+    background-color: var(--dark--70);
+}
+
+.MenuItemLink {
+    text-decoration: none;
+    color: var(--gray--50);
+}
+
+.MenuItemLink:hover {
+    cursor: pointer;
+}
+
+.MenuIcon {
+    margin-right: 1rem;
+}

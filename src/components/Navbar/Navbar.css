@@ -1,0 +1,33 @@
+.Navbar {
+    background-color: var(--dark--100);
+    padding: 0.72rem;
+    color:var(--dark--0);
+    display: flex;
+}
+
+.Navbar .NavbarIcon:hover {
+    background-color: var(--dark--75);
+    cursor: pointer;
+}
+
+.NavbarButtons {
+    flex-grow: 1;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.NavbarIcon {
+    display: flex;
+    align-items: center;
+    padding: 0rem 0.2rem;
+}
+
+.NavbarLogout {
+    display: flex;
+    align-items: center;
+}
+
+.NavbarLogout:hover {
+    cursor: pointer;
+}

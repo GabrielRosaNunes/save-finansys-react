@@ -1,0 +1,4 @@
+.CrudAddFormButtons {
+    display: flex;
+    justify-content: end;
+}

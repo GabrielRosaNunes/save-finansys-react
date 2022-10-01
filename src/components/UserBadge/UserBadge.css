@@ -1,0 +1,30 @@
+.UserBadge {
+   
+    padding-left: 1rem;
+    align-items: center;
+}
+
+.UserBadgeContent {
+    display: flex;
+    padding:0.2rem 0.5rem;
+    border-radius: 1rem;
+    background-color: var(--dark--70);
+}
+
+.UserBadgePhoto {
+    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.UserBadgePhoto img {
+    width: 14px;
+    height: 14px;
+    border-radius: 1rem;
+}
+
+.UserBadgeEmail {
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,22 @@
+.TableCrud {
+    width: 100%;
+    border-spacing: 0px;
+    overflow: hidden;
+    color: var(--gray--60);
+}
+
+
+
+.TableCrud tbody td {
+    border-top: 0.1rem solid var(--gray--80);
+    padding: 0rem;
+}
+
+.TableCrud th, .TableCrud td {
+    padding: 0.5rem;
+    text-align: center;
+}
+
+tbody .Icon {
+    width: 1rem;
+}
