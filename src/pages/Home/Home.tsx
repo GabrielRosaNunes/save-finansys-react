@@ -1,77 +1,60 @@
-import { useContext, useEffect, useRef, useState } from "react"
+import {  useEffect,  useState } from "react"
 import CalculatorIcon from "../../assets/icons/CalculatorIcon"
 import ClipboardIcon from "../../assets/icons/ClipboardIcon"
 import MoneyIcon from "../../assets/icons/MoneyIcon"
 import ValueCard from "../../components/ValueCard/ValueCard"
-import { StoreContext } from "../../contexts/StoreContext"
-import Firebase from "../../Core/Firebase"
+import { Despesas } from "../../Core/Types/Despesas"
+import { Dividas } from "../../Core/Types/Dividas"
+import { Ganhos } from "../../Core/Types/ganhos"
+import { useFirebaseQuery } from "../../Hooks/useFirebaseQuery"
 import './Home.css'
 
 export default () => {
     const [totalGanhos,setTotalGanhos] = useState(0)
     const [totalDespesas,setTotalDespesas] = useState(0)
     const [totalDividas,setTotalDividas] = useState(0)
-    const {state} = useContext(StoreContext)
+    const { getAll:getAllGanhos } = useFirebaseQuery<Ganhos>('ganhos')
+    const { getAll:getAllDespesas } = useFirebaseQuery<Despesas>('despesas')
+    const { getAll:getAllDividas } = useFirebaseQuery<Dividas>('dividas')
 
     useEffect(getSumGanhos,[])
     useEffect(getSumDespesas,[])
     useEffect(getSumDividas,[])
 
     function getSumGanhos() {
-        const firebaseGanhos = new Firebase('ganhos',state.userEmail);
-            firebaseGanhos.getAll().then(
-                (dados) => {
-                    const data = dados.reduce(
-                        (previousValue:number,currentValue:any):number => {
-                            let count = 0;
-                            if (previousValue) {
-                                count = previousValue
-                            }
-                            return count + parseInt(currentValue.valor)
-                        },0
-                    )
-
-                    setTotalGanhos(data)
-                }
-            )
+        getAllGanhos().then(
+            dados => {
+                const sumGanhos = dados.reduce(
+                    (previousValue,currentValue):number => (previousValue ?? 0) + parseInt(currentValue.valor),
+                    0
+                )
+                setTotalGanhos(sumGanhos);
+            }
+        )
     }
 
     function getSumDespesas() {
-        const firebaseDespesas = new Firebase('despesas',state.userEmail);
-            firebaseDespesas.getAll().then(
-                (dados) => {
-                    const data = dados.reduce(
-                        (previousValue:number,currentValue:any):number => {
-                            let count = 0;
-                            if (previousValue) {
-                                count = previousValue
-                            }
-                            return count + parseInt(currentValue.valor)
-                        },0
-                    )
-
-                    setTotalDespesas(data)
-                }
-            )
+        getAllDespesas().then(
+            dados => {
+                const sumDespesas = dados.reduce(
+                    (previousValue,currentValue):number => (previousValue ?? 0) + parseInt(currentValue.valor),
+                    0
+                )
+                setTotalDespesas(sumDespesas);
+            }
+        )
     }
 
     function getSumDividas() {
-        const firebaseDividas = new Firebase('dividas',state.userEmail);
-            firebaseDividas.getAll().then(
-                (dados) => {
-                    const data = dados.reduce(
-                        (previousValue:number,currentValue:any):number => {
-                            let count = 0;
-                            if (previousValue) {
-                                count = previousValue
-                            }
-                            return count + parseInt(currentValue.valor)
-                        },0
-                    )
-
-                    setTotalDividas(data)
-                }
-            )
+        getAllDividas().then(
+            dados => {
+                const sumDividas = dados.reduce(
+                    (previousValue,currentValue):number => (previousValue ?? 0) + parseInt(currentValue.valor),
+                    0
+                )
+                setTotalDividas(sumDividas);
+            }
+        )
     }
     
     return (

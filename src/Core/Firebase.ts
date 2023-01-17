@@ -1,8 +1,6 @@
 import appFirebase from "../Config/FirebaseConfiguration";
 import {getFirestore, collection, getDocs,query, setDoc, addDoc, doc, getDoc, deleteDoc, where} from 'firebase/firestore/lite'
 import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, signOut} from 'firebase/auth'
-import { useContext } from "react";
-import { StoreContext } from "../contexts/StoreContext";
 
 export default class Firebase {
     table:string;

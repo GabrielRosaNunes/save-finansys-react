@@ -7,6 +7,7 @@ import FieldForm from '../../components/FieldForm/FieldForm'
 import { StoreContext } from '../../contexts/StoreContext'
 import Field from '../../Core/Field'
 import Firebase from '../../Core/Firebase'
+import { signInWithEmail, signInWithGmail } from '../../Core/FirebaseLoggerControl'
 import './Login.css'
 
 export default () => {
@@ -29,13 +30,8 @@ export default () => {
     }
 
     function login() {
-        /* setState((dados) => {
-            return {...dados,'logged':true}
-        }) */
-        console.log('login email =>',email,password)
-        const firebase = new Firebase('',email);
 
-        firebase.signInEmail(email,password).then(
+        signInWithEmail(email,password).then(
             (data) => {
                 dispatch({ 
                     type:'LOGIN',
@@ -54,8 +50,7 @@ export default () => {
     }
 
     function loginGmail() {
-        const firebase = new Firebase('',email);
-        firebase.signInGmail().then(
+        signInWithGmail().then(
             (data) => {
                 dispatch({
                     type:"LOGIN",

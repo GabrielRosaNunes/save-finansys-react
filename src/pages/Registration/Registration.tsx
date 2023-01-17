@@ -7,6 +7,7 @@ import FieldForm from '../../components/FieldForm/FieldForm'
 import { StoreContext } from '../../contexts/StoreContext'
 import Field from '../../Core/Field'
 import Firebase from '../../Core/Firebase'
+import { createUserEmail } from '../../Core/FirebaseLoggerControl'
 import './Registration.css'
 
 export default () => {
@@ -36,8 +37,7 @@ export default () => {
     }
 
     function createUser() {
-        const firebase = new Firebase('','');
-        firebase.createUserEmail(email,password).then(
+        createUserEmail(email,password).then(
             (data) => {
                 console.log(data);
                 navigate('/',{replace:true});
@@ -50,7 +50,6 @@ export default () => {
     }
 
     function cancelRegistration() {
-        
         navigate('/',{ replace:true })
     }
 
