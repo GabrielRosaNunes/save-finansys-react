@@ -1,8 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { StoreContext } from "../../../contexts/StoreContext"
 import Field from "../../../Core/Field"
-import Firebase from "../../../Core/Firebase"
+import { useFirebaseQuery } from "../../../Hooks/useFirebaseQuery"
 import Button from "../../Button/Button"
 import FieldForm from "../../FieldForm/FieldForm"
 import './CrudEditForm.css'
@@ -14,20 +13,18 @@ interface CrudEditFormProps {
     id?: string,
 }
 
-export default (props:CrudEditFormProps) => {
+export default function CrudEditForm<T extends object>(props:CrudEditFormProps){
     const navigate = useNavigate();
-    const {state} = useContext(StoreContext);
-    const firebase = new Firebase(props.table,state.userEmail)
-    const [data,setData] = useState<any>({})
+    const [data,setData] = useState<T>({} as T)
     const [loading,setLoading] = useState(true)
+    const {getData,updateData} = useFirebaseQuery<T>(props.table)
 
     useEffect(
         () => {
             if (loading) {
-                firebase.getData(props.id).then(
-                    (firebaseData) => {
-                        console.log(firebaseData);
-                        setData(firebaseData)
+                getData(props.id).then(
+                    (firebaseData) =>{
+                        setData(firebaseData ?? {} as T)
                         setLoading(false)
                     }
                 )
@@ -36,7 +33,9 @@ export default (props:CrudEditFormProps) => {
 
     function defineFields () {
         return props.fields.map((field:Field,index) => {
-            return <FieldForm key={index} initialValue={data[field.nome] ?? ''}  fieldConfig={field} onChange={(valor) => changeValue(field.nome,valor)}></FieldForm>
+            type keyData = keyof T
+            const keyName = field.nome as keyData
+            return <FieldForm key={index} initialValue={data[keyName] ?? ''}  fieldConfig={field} onChange={(valor) => changeValue(field.nome,valor)}></FieldForm>
         })
     }
 
@@ -55,15 +54,7 @@ export default (props:CrudEditFormProps) => {
     }
 
     function editar() {
-        /* firebase.insertData(data).then((docRef) => {
-            console.log('inseriu ->',docRef)
-            navigate(props.linkTo,{'replace':true})
-        }) */
-        firebase.updateData(data,props.id).then(
-            () => {
-                navigate(props.linkTo,{'replace':true})
-            }
-        )
+        updateData(data,props.id).then(() => navigate(props.linkTo,{replace:true}))
     }
 
     return (

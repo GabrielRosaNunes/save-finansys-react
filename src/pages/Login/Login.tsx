@@ -6,7 +6,6 @@ import Button from '../../components/Button/Button'
 import FieldForm from '../../components/FieldForm/FieldForm'
 import { StoreContext } from '../../contexts/StoreContext'
 import Field from '../../Core/Field'
-import Firebase from '../../Core/Firebase'
 import { signInWithEmail, signInWithGmail } from '../../Core/FirebaseLoggerControl'
 import './Login.css'
 

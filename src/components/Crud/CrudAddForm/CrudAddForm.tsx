@@ -1,36 +1,39 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { StoreContext } from "../../../contexts/StoreContext"
 import Field from "../../../Core/Field"
 import Firebase from "../../../Core/Firebase"
+import { useFirebaseQuery } from "../../../Hooks/useFirebaseQuery"
 import Button from "../../Button/Button"
 import FieldForm from "../../FieldForm/FieldForm"
 import './CrudAddForm.css'
 
-interface CrudAddFormProps {
+interface CrudAddFormProps<T> {
     table: string,
     fields: Array<Field>,
-    linkTo: string
+    linkTo: string,
+    initialData:T
 }
 
-export default (props:CrudAddFormProps) => {
+export default function CrudAddForm<T extends object>(props:CrudAddFormProps<T>){
     const navigate = useNavigate();
-    const {state} = useContext(StoreContext);
-    const firebase = new Firebase(props.table,state.userEmail)
-    let data: any = {}
-
-    props.fields.forEach((field:Field) => {
-        data[field.nome] = undefined
-    })
+    const {insertData} = useFirebaseQuery<T>(props.table)
+    const [data,setData] = useState<T>(props.initialData)
 
     function defineFields () {
         return props.fields.map((field:Field,index) => {
-            return <FieldForm key={index}  fieldConfig={field} onChange={(valor) => changeValue(field.nome,valor)}></FieldForm>
+            type keyData = keyof Partial<T>
+            const keyName = field.nome as keyData
+            const partialData = {} as Partial<T>
+            return <FieldForm key={index}  fieldConfig={field} onChange={(valor) => {
+                partialData[keyName] = valor
+                changeValue(partialData)
+            }}></FieldForm>
         })
     }
 
-    function changeValue(fieldName:string,value:any) {
-        data[fieldName] = value
+    function changeValue(updateData:Partial<T>) {
+        setData({...data,...updateData})
     }
 
     function cancelOperation() {
@@ -38,10 +41,7 @@ export default (props:CrudAddFormProps) => {
     }
 
     function save() {
-        firebase.insertData(data).then((docRef) => {
-            console.log('inseriu ->',docRef)
-            navigate(props.linkTo,{'replace':true})
-        })
+        insertData(data).then(() => navigate(props.linkTo,{replace:true}))
     }
 
     return (
