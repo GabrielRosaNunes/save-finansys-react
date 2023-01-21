@@ -23,6 +23,7 @@ aside {
   
 main {
     flex-grow: 1;
+    width: 10px;
     height: 100vh;
     background-color: var(--dark--75);
   }
