@@ -8,35 +8,22 @@ import { useNavigate } from "react-router-dom"
 import PencilIcon from "../../assets/icons/PencilIcon"
 import TrashIcon from "../../assets/icons/TrashIcon"
 import PlusIcon from "../../assets/icons/PlusIcon"
-import { StoreContext } from "../../contexts/StoreContext"
+import { useFirebaseQuery } from "../../Hooks/useFirebaseQuery"
 
 interface CrudProps {
     table:string
     columns: Array<Field>
 }
 
-export default (props:CrudProps) => {
-    const [data, setData] = useState<any>([])
-    const {state} = useContext(StoreContext)
-    const firebase = new Firebase(props.table,state.userEmail)
-    const navigate = useNavigate();
-    
+export default function CrudList<T extends object>(props:CrudProps) {
+    const [data, setData] = useState<T[]>([] as T[])
+    const navigate = useNavigate()
+    const {getAll,deleteData} = useFirebaseQuery<T>(props.table)
     useEffect(() => {
-        firebase.getAll().then(
-            (firebaseData) => {
-                console.log('crud-dados',firebaseData);
-                setData(firebaseData ?? []);
-            }
-        )
+        getAll().then((firebaseData) => {
+            setData(firebaseData)
+        })
     },[]) 
-
-    function deleteData(id?:string) {
-        firebase.deleteData(id).then(
-            () => {
-                navigate(0)
-            }
-        )
-    }
 
     function defineBodyTable() {
         return  data.map((lineData:any,index:any) => {
@@ -47,7 +34,10 @@ export default (props:CrudProps) => {
                     })}
                     <td style={{"display":'flex','justifyContent':'center'}}>
                         <Button texto="" icon={<PencilIcon />} color="orange" onClick={() => navigate('/'+props.table+'/edit/'+lineData['id'],{'replace':true})} />
-                        <Button texto="" icon={<TrashIcon />} color="red" onClick={() => deleteData(lineData['id'])} />
+                        <Button texto="" icon={<TrashIcon />} color="red" 
+                            onClick={() => {
+                                deleteData().then(() => navigate(0))
+                            }} />
                     </td>
                 </tr>
             )

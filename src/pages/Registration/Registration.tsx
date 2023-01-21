@@ -1,12 +1,10 @@
 
-import { useContext, useState } from 'react'
+import {  useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LogoIcon from '../../assets/icons/LogoIcon'
 import Button from '../../components/Button/Button'
 import FieldForm from '../../components/FieldForm/FieldForm'
-import { StoreContext } from '../../contexts/StoreContext'
 import Field from '../../Core/Field'
-import Firebase from '../../Core/Firebase'
 import { createUserEmail } from '../../Core/FirebaseLoggerControl'
 import './Registration.css'
 
