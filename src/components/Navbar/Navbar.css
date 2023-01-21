@@ -1,6 +1,6 @@
 .Navbar {
     background-color: var(--dark--100);
-    padding: 0.72rem;
+    padding: 0.60rem;
     color:var(--dark--0);
     display: flex;
 }
@@ -26,8 +26,12 @@
 .NavbarLogout {
     display: flex;
     align-items: center;
+    gap:0.5rem;
+    padding:0.2rem;
 }
 
 .NavbarLogout:hover {
     cursor: pointer;
+    background-color: var(--dark--75);
+    border-radius:0.5rem;
 }
